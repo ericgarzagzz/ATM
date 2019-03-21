@@ -23,7 +23,10 @@ void PrintOption(std::string optionName, COORD initCoords)
 	}
 	
 	ConsoleGoTo(initCoords.X + 1, initCoords.Y + 1);
-	std::cout << optionName;
+	ConsoleTextColor(CONSOLE_GREEN);
+	std::cout << optionName.substr(0, 1); // First letter
+	ConsoleTextColor(CONSOLE_WHITE);
+	std::cout << optionName.substr(1, optionName.size()); // Rest of the option name
 	
 	// Bottom border
 	ConsoleGoTo(initCoords.X, initCoords.Y + 2);
@@ -75,4 +78,9 @@ void ConsoleGoTo(short x, short y)
 {
 	COORD newPosition = { x, y };
 	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), newPosition);
+}
+
+void ConsoleTextColor(int colorAttribute)
+{
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), colorAttribute);
 }
