@@ -9,6 +9,15 @@ void ShowMenu()
 	std::cin.get();
 }
 
+void PrintOption(char* optionName)
+{
+	// Print a border style of the option name size
+	for (int i = 0; i < sizeof(optionName); i++)
+	{
+		std::cout << "#";
+	}
+}
+
 void PrintBorders()
 {
 	CONSOLE_SCREEN_BUFFER_INFO csbi; // Console info
@@ -20,24 +29,24 @@ void PrintBorders()
 	int consoleRows = csbi.srWindow.Bottom - csbi.srWindow.Top + 1;
 	
 	// Top and bottom borders
-	for (int i = 0; i < consoleColumns; i++)
+	for (int i = MARGIN; i < consoleColumns - MARGIN; i++)
 	{
 		// Top
-		ConsoleGoTo(i, 0); // x = column number, y = 0
+		ConsoleGoTo(i, MARGIN); // x = column number, y = 0
 		std::cout << "#";
 		// Bottom
-		ConsoleGoTo(i, consoleRows - 1); // x = column number, y = total of rows
+		ConsoleGoTo(i, consoleRows - 1 - MARGIN); // x = column number, y = total of rows
 		std::cout << "#";
 	}
 	
 	// Left and right border
-	for (int i = 0; i < consoleRows; i++)
+	for (int i = MARGIN; i < consoleRows - MARGIN; i++)
 	{
 		// Left
-		ConsoleGoTo(0, i); // x = 0, y = row number
+		ConsoleGoTo(MARGIN, i); // x = 0, y = row number
 		std::cout << "#";
 		// Right
-		ConsoleGoTo(consoleColumns - 1, i); // x = total of columns, y = row number
+		ConsoleGoTo(consoleColumns - 1 - MARGIN, i); // x = total of columns, y = row number
 		std::cout << "#";
 	}
 }
