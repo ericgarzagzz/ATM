@@ -8,7 +8,7 @@
 #include <windows.h>
 
 void ShowMenu();
-void PrintOption(char* optionName);
+void PrintOption(std::string optionName, COORD initCoords);
 void PrintBorders();
 void GetConsoleInfo(CONSOLE_SCREEN_BUFFER_INFO* csbi);
 void ConsoleGoTo(short x, short y);

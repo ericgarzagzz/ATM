@@ -4,17 +4,32 @@ void ShowMenu()
 {
 	PrintBorders();
 	
-	ConsoleGoTo(0, 0); // Move cursor to console begining
+	// First menu option
+	PrintOption("Bank Balance", { 5, 4 });
+	PrintOption("Withdraw", { 5, 8 });
 	
 	std::cin.get();
 }
 
-void PrintOption(char* optionName)
+void PrintOption(std::string optionName, COORD initCoords)
 {
-	// Print a border style of the option name size
-	for (int i = 0; i < sizeof(optionName); i++)
+	int centeringSpace = 2;
+	
+	ConsoleGoTo(initCoords.X, initCoords.Y);
+	// Top border
+	for (int i = 0; i < optionName.size() + centeringSpace; i++)
 	{
-		std::cout << "#";
+		std::cout << "=";
+	}
+	
+	ConsoleGoTo(initCoords.X + 1, initCoords.Y + 1);
+	std::cout << optionName;
+	
+	// Bottom border
+	ConsoleGoTo(initCoords.X, initCoords.Y + 2);
+	for (int i = 0; i < optionName.size() + centeringSpace; i++)
+	{
+		std::cout << "=";
 	}
 }
 
