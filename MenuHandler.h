@@ -9,12 +9,17 @@
 #include <iostream>
 #include <stdio.h>
 #include <windows.h>
+#include <conio.h>
+#include "BankBalance.h"
 
 void ShowMenu();
 void PrintOption(std::string optionName, COORD initCoords);
 void PrintBorders();
+void DecideAction();
+char ReadKeyAnswer();
 void GetConsoleInfo(CONSOLE_SCREEN_BUFFER_INFO* csbi);
 void ConsoleGoTo(short x, short y);
 void ConsoleTextColor(int colorAttribute);
+void ClearScreen();
 
 #endif

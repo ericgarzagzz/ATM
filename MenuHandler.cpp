@@ -8,7 +8,7 @@ void ShowMenu()
 	PrintOption("Bank Balance", { 5, 4 });
 	PrintOption("Withdraw", { 5, 8 });
 	
-	std::cin.get();
+	DecideAction(); // Wait for user interaction and decide the corresponding procedure
 }
 
 void PrintOption(std::string optionName, COORD initCoords)
@@ -69,6 +69,38 @@ void PrintBorders()
 	}
 }
 
+void DecideAction()
+{
+	char selectedOption = ReadKeyAnswer();
+	
+	BankBalance bankBalance = { 1234 };
+	
+	switch (selectedOption)
+	{
+		case 'B': // Balance account
+		case 'b':
+			ClearScreen();
+			bankBalance.Start();
+			break;
+		case 'W': // Withdraw
+		case 'w':
+			ClearScreen();
+			std::cout << "Processing withdraw menu...";
+			break;
+		default:
+			std::cout << "Wrong key...";
+			break;
+	}
+}
+
+char ReadKeyAnswer()
+{
+	char option;
+	option = _getch();
+	
+	return option;
+}
+
 void GetConsoleInfo(CONSOLE_SCREEN_BUFFER_INFO* csbi)
 {
 	GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), csbi); // Populate console info variable
@@ -83,4 +115,41 @@ void ConsoleGoTo(short x, short y)
 void ConsoleTextColor(int colorAttribute)
 {
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), colorAttribute);
+}
+
+void ClearScreen()
+{
+	HANDLE                     hStdOut;
+  	CONSOLE_SCREEN_BUFFER_INFO csbi;
+  	DWORD                      count;
+  	DWORD                      cellCount;
+  	COORD                      homeCoords = { 0, 0 };
+  	
+  	hStdOut = GetStdHandle( STD_OUTPUT_HANDLE );
+  	if (hStdOut == INVALID_HANDLE_VALUE) return;
+  	
+  	/* Get the number of cells in the current buffer */
+  	if (!GetConsoleScreenBufferInfo( hStdOut, &csbi )) return;
+  	cellCount = csbi.dwSize.X *csbi.dwSize.Y;
+
+  	/* Fill the entire buffer with spaces */
+  	if (!FillConsoleOutputCharacter(
+    	hStdOut,
+    	(TCHAR) ' ',
+    	cellCount,
+    	homeCoords,
+    	&count
+    )) return;
+
+  	/* Fill the entire buffer with the current colors and attributes */
+  	if (!FillConsoleOutputAttribute(
+    	hStdOut,
+    	csbi.wAttributes,
+    	cellCount,
+    	homeCoords,
+    	&count
+    )) return;
+
+  	/* Move the cursor home */
+  	SetConsoleCursorPosition( hStdOut, homeCoords );
 }
