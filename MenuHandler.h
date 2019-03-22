@@ -5,6 +5,7 @@
 
 #define CONSOLE_GREEN 0x002
 #define CONSOLE_WHITE 0x00F
+#define CONSOLE_RED   0x00C
 
 #include <iostream>
 #include <stdio.h>

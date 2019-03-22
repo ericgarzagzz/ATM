@@ -2,6 +2,7 @@
 
 void ShowMenu()
 {
+	ClearScreen();
 	PrintBorders();
 	
 	// First menu option

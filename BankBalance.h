@@ -12,8 +12,10 @@ class BankBalance
 	public:
 		BankBalance(short pinCode);
 		void Start();
+		void PrintReturnOption();
 	private:
 		money_t GetBalance();
+		void Back();
 };
 
 #endif
