@@ -12,6 +12,8 @@ class BankBalance
 	public:
 		BankBalance(short pinCode);
 		void Start();
+		void PrintBalance();
+		void ReadKey();
 		void PrintReturnOption();
 	private:
 		money_t GetBalance();

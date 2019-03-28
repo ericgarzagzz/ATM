@@ -6,10 +6,18 @@ BankBalance::BankBalance(short pinCode)
 }
 
 void BankBalance::Start()
+{	
+	PrintBorders();
+	PrintBalance();
+	PrintReturnOption();
+	ReadKey();
+}
+
+void BankBalance::PrintBalance()
 {
-	int middlePadding = 7;
-	
 	money_t currentBalance = GetBalance();
+	
+	int middlePadding = 7;
 	
 	CONSOLE_SCREEN_BUFFER_INFO csbi;
 	GetConsoleInfo(&csbi);
@@ -21,9 +29,6 @@ void BankBalance::Start()
 	int middleColumn = (consoleColumns / 2) - middlePadding;
 	int middleRow = consoleRows / 2;
 	
-	// Print screen borders
-	PrintBorders();
-	
 	// Move to middle of screen
 	ConsoleGoTo(middleColumn, middleRow);
 	
@@ -31,12 +36,13 @@ void BankBalance::Start()
 	ConsoleGoTo(middleColumn, middleRow + 2); // Move down two rows
 	ConsoleTextColor(CONSOLE_GREEN); // Green text color
 	std::cout << currentBalance;
+	
 	ConsoleTextColor(CONSOLE_WHITE); // White text color
-	
-	PrintReturnOption();
-	
+}
+
+void BankBalance::ReadKey()
+{
 	char option = ReadKeyAnswer();
-	
 	if (option == 'B' || option == 'b') Back();
 }
 
